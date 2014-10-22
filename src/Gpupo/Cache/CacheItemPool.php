@@ -7,8 +7,29 @@ use Psr\Cache\CacheItemPoolInterface;
 
 /**
  */
-class CachePool implements CacheItemPoolInterface
+class CacheItemPool implements CacheItemPoolInterface
 {
+    protected $driver;
+
+    public function getDriver(){
+        return $this->driver;
+    }
+
+    protected function setDriver($driver)
+    {
+        if (!$driver instanceof \Gpupo\Cache\Driver\DriverInterface) {
+            $className = '\\Gpupo\\Cache\\Driver\\' . ucfirst(strtolower($driver)) . 'Driver';
+            $driver = new $className;
+        }
+        
+        $this->driver = $driver;
+    }
+
+    public function __construct($driver = 'APC')
+    {
+        $this->setDriver($driver);
+    }
+
     /**
      * @param  string                                    $key
      * @return CacheItem|\Psr\Cache\CacheItemInterface

@@ -16,11 +16,12 @@
         "psr/cache": "1.0.0"
     },    
     "autoload": {
-        "psr-4": { "Gpupo\\": "src/Gpupo/", "Psr\\": "src/Psr/" }
+        "psr-4": { "Gpupo\\Cache\\": "src/Gpupo/Cache/", "Psr\\": "src/Psr/" }
     },
     "autoload-dev": {
         "psr-4": {
-            "Gpupo\\Tests\\": "tests/Gpupo/Tests"
+            "Gpupo\\Tests\\": "tests/Gpupo/Tests",
+            "Gpupo\\Example\\": "src/Gpupo/Example"
         }
     },
     "extra": {

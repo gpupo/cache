@@ -11,11 +11,11 @@ class CachePool implements CacheItemPoolInterface
 {
     /**
      * @param  string                                    $key
-     * @return NoCacheItem|\Psr\Cache\CacheItemInterface
+     * @return CacheItem|\Psr\Cache\CacheItemInterface
      */
     public function getItem($key)
     {
-        return new NoCacheItem($key);
+        return new CacheItem($key);
     }
 
     /**

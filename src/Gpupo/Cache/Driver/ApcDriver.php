@@ -5,52 +5,21 @@ namespace Gpupo\Cache\Driver;
 /**
  * Driver de conexao do PHP com a memoria, utilizando APC
  */
-class ApcDriver implements DriverInterface
+class ApcDriver extends DriverAbstract implements DriverInterface
 {
-    private $parameters;
-
     /**
-     * Parameters Injection
-     *
-     * @param \stdClass $parameters
-     */
-    public function setParameters(\stdClass $parameters)
-    {
-        $this->parameters = $parameters;
-    }
-
-    /**
-     * Valida uma string identificadora de objetos
-     *
-     * @param  string  $id
-     * @return boolean
-     */
-    protected static function isValid($id)
-    {
-        if (empty($id)) {
-            error_log('APC: chamada com id vazio!');
-
-            return false;
-        }
-
-        return true;
-    }
-
-    /**
-     * Guarda o cache de um objeto.
-     *
      * @param  string  $id   Gerado por getCacheId
      * @param  mixed   $obj  Valor ou objeto
      * @param  int     $time Em segundos. Por padr�o o valor � 30 minutos(1800)
      * @return boolean
      */
-    public function setCache($id, $obj, $time = 1800, $serialize = true)
+    public function save($id, $obj, $time = 1800, $serialize = true)
     {
-        if (!function_exists('apc_store')) {
+        if (!$this->isSupported()) {
             return false;
         }
 
-        if (!$this->isValid($id)) {
+        if (!$this->isValidKey($id)) {
             return false;
         }
 
@@ -58,31 +27,21 @@ class ApcDriver implements DriverInterface
             $obj = serialize($obj);
         }
 
-        $o = apc_store($id, $obj, $time);
-        if ($o == false) {
-            Logger::addDebug('Impossivel gravar em memoria',
-                array(
-                    'id' => $id,
-                )
-            );
-        }
-
-        return $o;
+        return apc_store($id, $obj, $time);
     }
 
     /**
-     * Resgata um objeto da mem�ria
      *
      * @param  string  $id Gerado por getCacheId
      * @return boolean
      */
-    public function getCache($id, $unserialize = true)
+    public function get($id, $unserialize = true)
     {
-        if (!function_exists('apc_fetch')) {
+        if (!$this->isSupported()) {
             return false;
         }
 
-        if (!$this->isValid($id)) {
+        if (!$this->isValidKey($id)) {
             return false;
         }
 
@@ -106,11 +65,11 @@ class ApcDriver implements DriverInterface
      */
     public function clearCache($id)
     {
-        if (!function_exists('apc_delete')) {
+        if (!$this->isSupported()) {
             return false;
         }
 
-        if (!$this->isValid($id)) {
+        if (!$this->isValidKey($id)) {
             return false;
         }
 

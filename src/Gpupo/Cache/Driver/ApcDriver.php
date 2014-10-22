@@ -2,40 +2,40 @@
 
 namespace Gpupo\Cache\Driver;
 
-
 /**
  * Driver de conexao do PHP com a memoria, utilizando APC
  */
 class ApcDriver implements DriverInterface
 {
     private $parameters;
-    
+
     /**
      * Parameters Injection
-     * 
-     * @param \stdClass $parameters 
+     *
+     * @param \stdClass $parameters
      */
     public function setParameters(\stdClass $parameters)
     {
         $this->parameters = $parameters;
     }
-    
+
     /**
-     * Valida uma string identificadora de objetos 
-     * 
-     * @param  string $id
+     * Valida uma string identificadora de objetos
+     *
+     * @param  string  $id
      * @return boolean
      */
     protected static function isValid($id)
     {
         if (empty($id)) {
             error_log('APC: chamada com id vazio!');
+
             return false;
         }
 
         return true;
     }
-    
+
     /**
      * Guarda o cache de um objeto.
      *
@@ -68,8 +68,8 @@ class ApcDriver implements DriverInterface
         }
 
         return $o;
-    }   
-    
+    }
+
     /**
      * Resgata um objeto da mem�ria
      *
@@ -97,7 +97,7 @@ class ApcDriver implements DriverInterface
 
         return false;
     }
-    
+
     /**
      * Limpa o cache de um objeto
      *
@@ -119,7 +119,7 @@ class ApcDriver implements DriverInterface
 
     /**
      * Verifica se o servidor Web tem suporte ao driver configurado
-     * 
+     *
      * @return boolean
      */
     public function isSupported()

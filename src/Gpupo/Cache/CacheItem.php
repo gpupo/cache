@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpupo\CommonSdk\Cache;
+namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
 
@@ -42,7 +42,7 @@ class CacheItem implements CacheItemInterface
     /**
      *
      * @param \Serializable $value
-     * @param int $ttl
+     * @param int           $ttl
      * @returns boolean
      */
     public function set($value = null, $ttl = null)
@@ -62,7 +62,7 @@ class CacheItem implements CacheItemInterface
      * Removes the current key from the cache.
      *
      * @return \Psr\Cache\CacheItemInterface
-     *   The current item.
+     *                                       The current item.
      */
     public function delete()
     {
@@ -96,16 +96,16 @@ class CacheItem implements CacheItemInterface
      * Sets the expiration for this cache item.
      *
      * @param int|\DateTime $ttl
-     *   - If an integer is passed, it is interpreted as the number of seconds
-     *     after which the item MUST be considered expired.
-     *   - If a DateTime object is passed, it is interpreted as the point in
-     *     time after which the item MUST be considered expired.
-     *   - If null is passed, a default value MAY be used. If none is set,
-     *     the value should be stored permanently or for as long as the
-     *     implementation allows.
+     *                           - If an integer is passed, it is interpreted as the number of seconds
+     *                           after which the item MUST be considered expired.
+     *                           - If a DateTime object is passed, it is interpreted as the point in
+     *                           time after which the item MUST be considered expired.
+     *                           - If null is passed, a default value MAY be used. If none is set,
+     *                           the value should be stored permanently or for as long as the
+     *                           implementation allows.
      *
      * @return static
-     *   The called object.
+     *                The called object.
      */
     public function setExpiration($ttl = null)
     {
@@ -119,7 +119,7 @@ class CacheItem implements CacheItemInterface
      * which the item expired or the current time if that is not available.
      *
      * @return \DateTime
-     *   The timestamp at which this cache item will expire.
+     *                   The timestamp at which this cache item will expire.
      */
     public function getExpiration()
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Gpupo\CommonSdk\Cache;
+namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
@@ -10,7 +10,7 @@ use Psr\Cache\CacheItemPoolInterface;
 class CachePool implements CacheItemPoolInterface
 {
     /**
-     * @param string $key
+     * @param  string                                    $key
      * @return NoCacheItem|\Psr\Cache\CacheItemInterface
      */
     public function getItem($key)
@@ -19,7 +19,7 @@ class CachePool implements CacheItemPoolInterface
     }
 
     /**
-     * @param array $keys
+     * @param  array              $keys
      * @return array|\Traversable
      */
     public function getItems(array $keys = array())
@@ -28,6 +28,7 @@ class CachePool implements CacheItemPoolInterface
         foreach ($keys as $key) {
             $result[$key] = $this->getItem($key);
         }
+
         return $result;
     }
 
@@ -42,10 +43,10 @@ class CachePool implements CacheItemPoolInterface
     /**
      * Removes multiple items from the pool.
      *
-     * @param array $keys
-     * An array of keys that should be removed from the pool.
+     * @param  array  $keys
+     *                      An array of keys that should be removed from the pool.
      * @return static
-     * The invoked object.
+     *                     The invoked object.
      */
     public function deleteItems(array $keys)
     {
@@ -56,10 +57,10 @@ class CachePool implements CacheItemPoolInterface
      * Persists a cache item immediately.
      *
      * @param CacheItemInterface $item
-     *   The cache item to save.
+     *                                 The cache item to save.
      *
      * @return static
-     *   The invoked object.
+     *                The invoked object.
      */
     public function save(CacheItemInterface $item)
     {
@@ -69,10 +70,10 @@ class CachePool implements CacheItemPoolInterface
     /**
      * Sets a cache item to be persisted later.
      *
-     * @param CacheItemInterface $item
-     *   The cache item to save.
+     * @param  CacheItemInterface $item
+     *                                  The cache item to save.
      * @return static
-     *   The invoked object.
+     *                                 The invoked object.
      */
     public function saveDeferred(CacheItemInterface $item)
     {
@@ -83,7 +84,7 @@ class CachePool implements CacheItemPoolInterface
      * Persists any deferred cache items.
      *
      * @return bool
-     *   TRUE if all not-yet-saved items were successfully saved. FALSE otherwise.
+     *              TRUE if all not-yet-saved items were successfully saved. FALSE otherwise.
      */
     public function commit()
     {

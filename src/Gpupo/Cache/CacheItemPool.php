@@ -80,6 +80,10 @@ class CacheItemPool implements CacheItemPoolInterface
      */
     public function deleteItems(array $keys)
     {
+        foreach ($keys as $key) {
+            $this->getDriver()->delete($key);
+        }
+        
         return $this;
     }
 

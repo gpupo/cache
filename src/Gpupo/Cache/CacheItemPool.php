@@ -18,14 +18,15 @@ class CacheItemPool implements CacheItemPoolInterface
     protected function setDriver($driver)
     {
         if (!$driver instanceof \Gpupo\Cache\Driver\DriverInterface) {
-            $className = '\\Gpupo\\Cache\\Driver\\' . ucfirst(strtolower($driver)) . 'Driver';
+            $className = '\\Gpupo\\Cache\\Driver\\' 
+                . ucfirst(strtolower($driver)) . 'Driver';
             $driver = new $className;
         }
         
         $this->driver = $driver;
     }
 
-    public function __construct($driver = 'APC')
+    public function __construct($driver = 'Apc')
     {
         $this->setDriver($driver);
     }
@@ -36,7 +37,15 @@ class CacheItemPool implements CacheItemPoolInterface
      */
     public function getItem($key)
     {
-        return new CacheItem($key);
+        $item = new CacheItem($key);
+
+        $cached = $this->getDriver()->get($key);
+
+        if ($cached) {
+            $item->set($cached);
+        }
+
+        return $item;
     }
 
     /**
@@ -85,7 +94,7 @@ class CacheItemPool implements CacheItemPoolInterface
      */
     public function save(CacheItemInterface $item)
     {
-        return $this;
+        return $this->getDriver()->save($item->getKey(), $item->get(), $item->getExpiration());
     }
 
     /**

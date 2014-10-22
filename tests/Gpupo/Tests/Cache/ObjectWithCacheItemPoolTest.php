@@ -8,7 +8,7 @@ use Gpupo\Example\ObjectWithCacheItemPool;
 
 class ObjectWithCacheItemPoolTest extends TestCaseAbstract
 {
-    public function testGravaItem()
+    public function testContemPool()
     {
         $pool = new CacheItemPool('Apc');
         $object = new ObjectWithCacheItemPool;

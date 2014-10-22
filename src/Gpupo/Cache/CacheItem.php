@@ -15,6 +15,10 @@ class CacheItem implements CacheItemInterface
      */
     private $key;
 
+    private $ttl = 60; 
+
+    private $value;
+    
     /**
      * @param string $key
      */
@@ -36,7 +40,7 @@ class CacheItem implements CacheItemInterface
      */
     public function get()
     {
-        return null;
+        return $this->value;
     }
 
     /**
@@ -47,6 +51,9 @@ class CacheItem implements CacheItemInterface
      */
     public function set($value = null, $ttl = null)
     {
+        $this->value = $value;
+        $this->setExpiration($ttl);
+
         return true;
     }
 
@@ -66,6 +73,8 @@ class CacheItem implements CacheItemInterface
      */
     public function delete()
     {
+        $this->set(null);
+         
         return $this;
     }
 
@@ -75,7 +84,7 @@ class CacheItem implements CacheItemInterface
      */
     public function exists()
     {
-        return false;
+        return !empty($this->value);
     }
 
     /**
@@ -104,26 +113,17 @@ class CacheItem implements CacheItemInterface
      *                           the value should be stored permanently or for as long as the
      *                           implementation allows.
      *
-     * @return static
-     *                The called object.
+     * @return static  The called object.
      */
     public function setExpiration($ttl = null)
     {
+        $this->ttl = $ttl;
+        
         return $this;
     }
 
-    /**
-     * Returns the expiration time of a not-yet-expired cache item.
-     *
-     * If this cache item is a Cache Miss, this method MAY return the time at
-     * which the item expired or the current time if that is not available.
-     *
-     * @return \DateTime
-     *                   The timestamp at which this cache item will expire.
-     */
     public function getExpiration()
     {
-        // expire now
-        return new \DateTime();
+        return $this->ttl;
     }
 }

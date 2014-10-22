@@ -63,7 +63,7 @@ class ApcDriver extends DriverAbstract implements DriverInterface
      * @param  string  $id
      * @return boolean
      */
-    public function clearCache($id)
+    public function delete($id)
     {
         if (!$this->isSupported()) {
             return false;

@@ -16,7 +16,7 @@
         "psr/cache": "1.0.0"
     },    
     "autoload": {
-        "psr-0": { "Gpupo": "src" }
+        "psr-4": { "Gpupo\\": "src/Gpupo/", "Psr\\": "src/Psr/" }
     },
     "extra": {
         "branch-alias": {

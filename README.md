@@ -8,6 +8,12 @@ Current Driver Suport:
 
 * APC
 
+
+## Install
+
+    composer require gpupo/cache:dev-master
+
+
 ## Contributors
 
 * [@gpupo](https://github.com/gpupo)

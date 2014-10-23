@@ -8,12 +8,12 @@ namespace Gpupo\Cache\Driver;
 class ApcDriver extends DriverAbstract implements DriverInterface
 {
     /**
-     * @param  string  $id   Gerado por getCacheId
-     * @param  mixed   $obj  Valor ou objeto
-     * @param  int     $time Em segundos. Por padr�o o valor � 30 minutos(1800)
+     * @param  string  $id
+     * @param  mixed   $obj
+     * @param  int     $ttl
      * @return boolean
      */
-    public function save($id, $obj, $time = 1800, $serialize = true)
+    public function save($id, $obj, $ttl, $serialize = true)
     {
         if (!$this->isSupported()) {
             return false;
@@ -27,13 +27,12 @@ class ApcDriver extends DriverAbstract implements DriverInterface
             $obj = serialize($obj);
         }
 
-        return apc_store($id, $obj, $time);
+        return apc_store($id, $obj, $ttl;
     }
 
     /**
-     *
-     * @param  string  $id Gerado por getCacheId
-     * @return boolean
+     * @param  string  $id
+     * @return boolean|mixed
      */
     public function get($id, $unserialize = true)
     {
@@ -46,6 +45,7 @@ class ApcDriver extends DriverAbstract implements DriverInterface
         }
 
         $obj = apc_fetch($id);
+
         if ($obj !== false) {
             if (!$unserialize) {
                 return $obj;
@@ -58,8 +58,6 @@ class ApcDriver extends DriverAbstract implements DriverInterface
     }
 
     /**
-     * Limpa o cache de um objeto
-     *
      * @param  string  $id
      * @return boolean
      */
@@ -77,8 +75,6 @@ class ApcDriver extends DriverAbstract implements DriverInterface
     }
 
     /**
-     * Verifica se o servidor Web tem suporte ao driver configurado
-     *
      * @return boolean
      */
     public function isSupported()

@@ -2,19 +2,13 @@
 
 namespace Gpupo\Cache\Driver;
 
+use Gpupo\Common\Traits\OptionsTrait;
+use Gpupo\Common\Traits\SingletonTrait;
+
 abstract class DriverAbstract
 {
-    protected static $instance;
-
-    public static function getInstance()
-    {
-        if (!isset(self::$instance)) {
-            $class=get_called_class();
-            self::$instance = new $class();
-        }
-
-        return self::$instance;
-    }
+    use SingletonTrait;
+    use OptionsTrait;
 
     public function generateId($key, $prefix = null)
     {

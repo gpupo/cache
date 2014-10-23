@@ -12,10 +12,16 @@ class ApcDriverTest extends TestCaseAbstract
         $cacheId = 'foo';
         $value = 'bar';
         $driver = ApcDriver::getInstance(); 
-        $driver->save($cacheId, $value);
+        $driver->save($cacheId, $value, 60);
         $this->assertEquals('bar', $driver->get($cacheId));
     }
-    
+
+    public function testPossuiOpcoesPersonalizadas()
+    {
+        $driver = ApcDriver::getInstance(); 
+        $driver->setOptions(['foo' => 'bar']);
+        $this->assertEquals('bar', $driver->getOptions()->get('foo'));
+    }            
     /**
      * @dataProvider dataProviderObjects
      */
@@ -23,7 +29,7 @@ class ApcDriverTest extends TestCaseAbstract
     {
         $driver = ApcDriver::getInstance(); 
         $cacheId = $driver->generateId($object);
-        $driver->save($cacheId, $object);
+        $driver->save($cacheId, $object, 60);
         $this->assertEquals($object, $driver->get($cacheId));        
     }
     

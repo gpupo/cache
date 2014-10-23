@@ -27,7 +27,7 @@ class ApcDriver extends DriverAbstract implements DriverInterface
             $obj = serialize($obj);
         }
 
-        return apc_store($id, $obj, $ttl;
+        return apc_store($id, $obj, $ttl);
     }
 
     /**

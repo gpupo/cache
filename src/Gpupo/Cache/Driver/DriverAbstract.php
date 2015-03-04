@@ -29,4 +29,27 @@ abstract class DriverAbstract
 
         return true;
     }
+
+    public function serialize($obj, $serialize = true)
+    {
+        if (!$serialize || is_string($obj)) {
+            return $obj;
+        }
+
+        $serialized = serialize($obj);
+
+        return $serialized;
+    }
+
+    public function unserialize($obj, $unserialize = true)
+    {
+        if (!$unserialize) {
+            return $obj;
+        }
+
+        $unserialized = unserialize($obj);
+
+        return $unserialized;
+    }
+
 }

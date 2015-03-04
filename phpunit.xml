@@ -13,7 +13,7 @@
 >
     <!-- Customize your parameters ! -->
     <php>
-        <const name="MEMCACHED_SERVER" value="localhost"/>
+        <const name="MEMCACHED_SERVER" value="intranet.sepha.com.br"/>
     </php>
     <testsuites>
         <testsuite name="Main Test Suite">

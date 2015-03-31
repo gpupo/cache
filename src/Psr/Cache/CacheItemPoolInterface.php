@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * This file is part of gpupo\cache
+ *
+ * (c) Gilmar Pupo <g@g1mr.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Psr\Cache;
 
 /**
@@ -6,51 +16,54 @@ namespace Psr\Cache;
  */
 interface CacheItemPoolInterface
 {
-
     /**
      * Returns a Cache Item representing the specified key.
      *
      * This method must always return an ItemInterface object, even in case of
      * a cache miss. It MUST NOT return null.
      *
-     * @param  string                              $key
-     *                                                  The key for which to return the corresponding Cache Item.
-     * @return \Psr\Cache\CacheItemInterface
-     *                                                 The corresponding Cache Item.
+     * @param string $key
+     *                    The key for which to return the corresponding Cache Item.
+     *
      * @throws \Psr\Cache\InvalidArgumentException
-     *                                                 If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
-     *                                                 MUST be thrown.
+     *                                             If the $key string is not a legal value a \Psr\Cache\InvalidArgumentException
+     *                                             MUST be thrown.
+     *
+     * @return \Psr\Cache\CacheItemInterface
+     *                                       The corresponding Cache Item.
      */
     public function getItem($key);
 
     /**
      * Returns a traversable set of cache items.
      *
-     * @param  array              $keys
-     *                                  An indexed array of keys of items to retrieve.
+     * @param array $keys
+     *                    An indexed array of keys of items to retrieve.
+     *
      * @return array|\Traversable
-     *                                 A traversable collection of Cache Items keyed by the cache keys of
-     *                                 each item. A Cache item will be returned for each key, even if that
-     *                                 key is not found. However, if no keys are specified then an empty
-     *                                 traversable MUST be returned instead.
+     *                            A traversable collection of Cache Items keyed by the cache keys of
+     *                            each item. A Cache item will be returned for each key, even if that
+     *                            key is not found. However, if no keys are specified then an empty
+     *                            traversable MUST be returned instead.
      */
     public function getItems(array $keys = array());
 
     /**
      * Deletes all items in the pool.
      *
-     * @return boolean
-     *                 True if the pool was successfully cleared. False if there was an error.
+     * @return bool
+     *              True if the pool was successfully cleared. False if there was an error.
      */
     public function clear();
 
     /**
      * Removes multiple items from the pool.
      *
-     * @param  array  $keys
-     *                      An array of keys that should be removed from the pool.
+     * @param array $keys
+     *                    An array of keys that should be removed from the pool.
+     *
      * @return static
-     *                     The invoked object.
+     *                The invoked object.
      */
     public function deleteItems(array $keys);
 
@@ -68,10 +81,11 @@ interface CacheItemPoolInterface
     /**
      * Sets a cache item to be persisted later.
      *
-     * @param  CacheItemInterface $item
-     *                                  The cache item to save.
+     * @param CacheItemInterface $item
+     *                                 The cache item to save.
+     *
      * @return static
-     *                                 The invoked object.
+     *                The invoked object.
      */
     public function saveDeferred(CacheItemInterface $item);
 
@@ -82,5 +96,4 @@ interface CacheItemPoolInterface
      *              TRUE if all not-yet-saved items were successfully saved. FALSE otherwise.
      */
     public function commit();
-
 }

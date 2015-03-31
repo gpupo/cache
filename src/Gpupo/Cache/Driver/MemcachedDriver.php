@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of gpupo\cache
+ *
+ * (c) Gilmar Pupo <g@g1mr.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Gpupo\Cache\Driver;
 
 use Memcached;
@@ -7,17 +16,17 @@ use Memcached;
 class MemcachedDriver extends DriverAbstract implements DriverInterface
 {
     private $client;
-    
+
     public function getClient()
     {
         if (!$this->client) {
-            $client = new Memcached;
+            $client = new Memcached();
             $client->addServer(
                 $this->getOptions()->get('serverEndPoint', 'localhost'),
                 $this->getOptions()->get('serverPort', 11211));
             $this->setClient($client);
         }
-        
+
         return $this->client;
     }
 
@@ -27,7 +36,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
         return $this;
     }
-        
+
     public function save($id, $obj, $ttl, $serialize = true)
     {
         if (!$this->isSupported()) {
@@ -35,16 +44,16 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
         }
 
         $obj = $this->serialize($obj, $serialize);
-       
-       var_dump(
+
+        var_dump(
        [
-        'id' => $id,
-        'obj' => $obj,
-        'ttl' => $ttl,
+        'id'      => $id,
+        'obj'     => $obj,
+        'ttl'     => $ttl,
         'options' => $this->getOptions()->toArray(),
        ]
        );
-        
+
         return $this->getClient()->set($id, $obj, $ttl);
     }
 

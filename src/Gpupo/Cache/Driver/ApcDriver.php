@@ -1,17 +1,27 @@
 <?php
 
+/*
+ * This file is part of gpupo\cache
+ *
+ * (c) Gilmar Pupo <g@g1mr.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Gpupo\Cache\Driver;
 
 /**
- * Driver de conexao do PHP com a memoria, utilizando APC
+ * Driver de conexao do PHP com a memoria, utilizando APC.
  */
 class ApcDriver extends DriverAbstract implements DriverInterface
 {
     /**
-     * @param  string  $id
-     * @param  mixed   $obj
-     * @param  int     $ttl
-     * @return boolean
+     * @param string $id
+     * @param mixed  $obj
+     * @param int    $ttl
+     *
+     * @return bool
      */
     public function save($id, $obj, $ttl, $serialize = true)
     {
@@ -29,8 +39,9 @@ class ApcDriver extends DriverAbstract implements DriverInterface
     }
 
     /**
-     * @param  string  $id
-     * @return boolean|mixed
+     * @param string $id
+     *
+     * @return bool|mixed
      */
     public function get($id, $unserialize = true)
     {
@@ -56,8 +67,9 @@ class ApcDriver extends DriverAbstract implements DriverInterface
     }
 
     /**
-     * @param  string  $id
-     * @return boolean
+     * @param string $id
+     *
+     * @return bool
      */
     public function delete($id)
     {
@@ -73,7 +85,7 @@ class ApcDriver extends DriverAbstract implements DriverInterface
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSupported()
     {

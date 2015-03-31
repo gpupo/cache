@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of gpupo\cache
+ *
+ * (c) Gilmar Pupo <g@g1mr.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
@@ -11,18 +20,19 @@ class CacheItemPool implements CacheItemPoolInterface
 {
     protected $driver;
 
-    public function getDriver(){
+    public function getDriver()
+    {
         return $this->driver;
     }
 
     protected function setDriver($driver)
     {
         if (!$driver instanceof \Gpupo\Cache\Driver\DriverInterface) {
-            $className = '\\Gpupo\\Cache\\Driver\\' 
-                . ucfirst(strtolower($driver)) . 'Driver';
-            $driver = new $className;
+            $className = '\\Gpupo\\Cache\\Driver\\'
+                .ucfirst(strtolower($driver)).'Driver';
+            $driver = new $className();
         }
-        
+
         $this->driver = $driver;
     }
 
@@ -32,7 +42,8 @@ class CacheItemPool implements CacheItemPoolInterface
     }
 
     /**
-     * @param  string                                    $key
+     * @param string $key
+     *
      * @return CacheItem|\Psr\Cache\CacheItemInterface
      */
     public function getItem($key)
@@ -49,7 +60,8 @@ class CacheItemPool implements CacheItemPoolInterface
     }
 
     /**
-     * @param  array              $keys
+     * @param array $keys
+     *
      * @return array|\Traversable
      */
     public function getItems(array $keys = array())
@@ -73,17 +85,18 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * Removes multiple items from the pool.
      *
-     * @param  array  $keys
-     *                      An array of keys that should be removed from the pool.
+     * @param array $keys
+     *                    An array of keys that should be removed from the pool.
+     *
      * @return static
-     *                     The invoked object.
+     *                The invoked object.
      */
     public function deleteItems(array $keys)
     {
         foreach ($keys as $key) {
             $this->getDriver()->delete($key);
         }
-        
+
         return $this;
     }
 
@@ -104,10 +117,11 @@ class CacheItemPool implements CacheItemPoolInterface
     /**
      * Sets a cache item to be persisted later.
      *
-     * @param  CacheItemInterface $item
-     *                                  The cache item to save.
+     * @param CacheItemInterface $item
+     *                                 The cache item to save.
+     *
      * @return static
-     *                                 The invoked object.
+     *                The invoked object.
      */
     public function saveDeferred(CacheItemInterface $item)
     {

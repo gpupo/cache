@@ -1,4 +1,14 @@
 <?php
+
+/*
+ * This file is part of gpupo\cache
+ *
+ * (c) Gilmar Pupo <g@g1mr.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Psr\Cache;
 
 /**
@@ -43,10 +53,11 @@ interface CacheItemInterface
      * be set to the maximum possible duration of the underlying storage
      * mechanism, or permanent if possible.
      *
-     * @param  mixed  $value
-     *                       The serializable value to be stored.
+     * @param mixed $value
+     *                     The serializable value to be stored.
+     *
      * @return static
-     *                      The invoked object.
+     *                The invoked object.
      */
     public function set($value);
 
@@ -56,8 +67,8 @@ interface CacheItemInterface
      * Note: This method MUST NOT have a race condition between calling isHit()
      * and calling get().
      *
-     * @return boolean
-     *                 True if the request resulted in a cache hit.  False otherwise.
+     * @return bool
+     *              True if the request resulted in a cache hit.  False otherwise.
      */
     public function isHit();
 
@@ -68,8 +79,8 @@ interface CacheItemInterface
      * reasons, which could result in a race condition between exists() and get().
      * To avoid that potential race condition use isHit() instead.
      *
-     * @return boolean
-     *                 True if item exists in the cache, false otherwise.
+     * @return bool
+     *              True if item exists in the cache, false otherwise.
      */
     public function exists();
 
@@ -80,7 +91,7 @@ interface CacheItemInterface
      * This can be used to prevent the dogpile effect to stop lots of requests re-generating
      * the fresh data over and over.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRegenerating();
 

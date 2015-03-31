@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Gpupo\Tests;
+namespace Gpupo\Tests\Cache;
 
 abstract class TestCaseAbstract extends \PHPUnit_Framework_TestCase
 {

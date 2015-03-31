@@ -12,7 +12,7 @@
 namespace Gpupo\Tests\Cache\Driver;
 
 use Gpupo\Cache\Driver\ApcDriver;
-use Gpupo\Tests\TestCaseAbstract;
+use Gpupo\Tests\Cache\TestCaseAbstract;
 
 class ApcDriverTest extends TestCaseAbstract
 {

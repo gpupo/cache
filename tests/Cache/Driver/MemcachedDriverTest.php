@@ -12,7 +12,7 @@
 namespace Gpupo\Tests\Cache\Driver;
 
 use Gpupo\Cache\Driver\MemcachedDriver;
-use Gpupo\Tests\TestCaseAbstract;
+use Gpupo\Tests\Cache\TestCaseAbstract;
 use Memcached;
 
 class MemcachedDriverTest extends TestCaseAbstract

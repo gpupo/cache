@@ -41,30 +41,22 @@ abstract class DriverAbstract
 
     public function serialize($obj, $serialize = true)
     {
-        if (!$serialize || is_string($obj)) {
-            return $obj;
-        }
-
-        $serialized = serialize($obj);
-
-        return $serialized;
+        return serialize($obj);
     }
 
-    public function unserialize($obj, $unserialize = true)
+    public function unserialize($string, $unserialize = true)
     {
         if (!$unserialize) {
-            return $obj;
+            return $string;
         }
 
-        $data = $obj;
-
-        $isJson = !preg_match('/[^,:{}\\[\\]0-9.\\-+Eaeflnr-u \\n\\r\\t]/',
-            preg_replace('/"(\\.|[^"\\\\])*"/', '', $data));
-
-        if (!$isJson) {            
-            return $data;
-        }
-        
-        return unserialize($data);
+        return unserialize($string);    
     }
+    
+    protected function isJson($string) {
+        json_decode($string);
+        return (json_last_error() == JSON_ERROR_NONE);
+    }
+
+
 }

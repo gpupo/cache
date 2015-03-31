@@ -13,7 +13,7 @@ namespace Gpupo\Tests\Cache;
 
 use Gpupo\Cache\CacheItem;
 use Gpupo\Cache\CacheItemPool;
-use Gpupo\Tests\TestCaseAbstract;
+use Gpupo\Tests\Cache\TestCaseAbstract;
 
 class CacheItemPoolTest extends TestCaseAbstract
 {

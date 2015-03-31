@@ -18,19 +18,19 @@
     },    
     "autoload": {
         "psr-4": {
-            "Gpupo\\Cache\\": "src/Gpupo/Cache/",
+            "Gpupo\\Cache\\": "src",
             "Psr\\": "src/Psr/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Gpupo\\Tests\\": "tests/Gpupo/Tests",
-            "Gpupo\\Example\\": "src/Gpupo/Example"
+            "Gpupo\\Tests\\Cache\\": "tests",
+            "Gpupo\\Example\\": "src/Example"
         }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.0.x-dev"
+            "dev-master": "1.3-dev"
         }
     },
     "minimum-stability" : "stable"

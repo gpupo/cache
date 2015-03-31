@@ -11,55 +11,45 @@
 
 namespace Gpupo\Tests\Cache\Driver;
 
-use Gpupo\Cache\Driver\MemcachedDriver;
-use Gpupo\Tests\TestCaseAbstract;
-use Memcached;
+use Gpupo\Cache\Driver\ApcDriver;
+use Gpupo\Tests\Cache\TestCaseAbstract;
 
-class MemcachedDriverTest extends TestCaseAbstract
+class ApcDriverTest extends TestCaseAbstract
 {
     public function setUp()
     {
         parent::setUp();
 
-        if (!class_exists('Memcached')) {
-            $this->markTestSkipped('The Memcached extension is not available.');
+        if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
+            $this->markTestSkipped('The APC extension is not available.');
         }
 
-        $mem = new Memcached();
-        $mem->addServer($this->getConstant('MEMCACHED_SERVER', 'localhost'), 11211);
-        $stats = $mem->getStats();
-        if (!isset($stats[$this->getConstant('MEMCACHED_SERVER', 'localhost').':11211'])) {
-            $this->markTestSkipped('The Memcached server is not running.');
+        if (!ini_get('apc.enable_cli')) {
+            $this->markTestSkipped('APC CLI disabled.');
         }
-    }
-
-    public function testPossuiClientMemcached()
-    {
-        $this->assertInstanceOf('\Memcached', MemcachedDriver::getInstance()->getClient());
     }
 
     public function testArmazenaInformacao()
     {
         $cacheId = 'foo';
         $value = 'bar';
-        $driver = $this->factoryDriver();
-        $this->assertTrue($driver->save($cacheId, $value, 60));
+        $driver = ApcDriver::getInstance();
+        $driver->save($cacheId, $value, 60);
         $this->assertEquals('bar', $driver->get($cacheId));
     }
 
     public function testPossuiOpcoesPersonalizadas()
     {
-        $driver = $this->factoryDriver();
+        $driver = ApcDriver::getInstance();
         $driver->setOptions(['foo' => 'bar']);
         $this->assertEquals('bar', $driver->getOptions()->get('foo'));
-    }            
-
+    }
     /**
      * @dataProvider dataProviderObjects
      */
     public function testArmazenaObjeto($object)
     {
-        $driver = $this->factoryDriver();
+        $driver = ApcDriver::getInstance();
         $cacheId = $driver->generateId($object);
         $driver->save($cacheId, $object, 60);
         $this->assertEquals($object, $driver->get($cacheId));
@@ -76,14 +66,5 @@ class MemcachedDriverTest extends TestCaseAbstract
         }
 
         return $data;
-    }
-
-    protected function factoryDriver()
-    {
-        $driver = MemcachedDriver::getInstance();
-        $endpoint = $this->getConstant('MEMCACHED_SERVER', 'localhost');
-        $driver->setOptions(['serverEndPoint' => $endpoint]);
-
-        return $driver;
     }
 }

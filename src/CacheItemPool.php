@@ -13,7 +13,7 @@ namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
 use Psr\Cache\CacheItemPoolInterface;
-
+use Gpupo\Cache\Driver\DriverInterface;
 /**
  */
 class CacheItemPool implements CacheItemPoolInterface
@@ -22,17 +22,25 @@ class CacheItemPool implements CacheItemPoolInterface
 
     public function getDriver()
     {
+        if (!$this->driver instanceof DriverInterface) {
+            throw new \InvalidArgumentException('DriverInterface missed');
+        }
+        
         return $this->driver;
     }
 
     protected function setDriver($driver)
     {
-        if (!$driver instanceof \Gpupo\Cache\Driver\DriverInterface) {
+        if (!$driver instanceof DriverInterface) {
             $className = '\\Gpupo\\Cache\\Driver\\'
                 .ucfirst(strtolower($driver)).'Driver';
             $driver = new $className();
         }
 
+        if (!$driver instanceof DriverInterface) {
+            throw new \InvalidArgumentException('$driver must implement DriverInterface');
+        }
+        
         $this->driver = $driver;
     }
 
@@ -47,15 +55,16 @@ class CacheItemPool implements CacheItemPoolInterface
      * @return CacheItem|\Psr\Cache\CacheItemInterface
      */
     public function getItem($key)
-    {
+    {      
         $item = new CacheItem($key);
-
+        
         $cached = $this->getDriver()->get($key);
 
         if ($cached) {
             $item->set($cached);
+            $item->setHits(1);
         }
-
+   
         return $item;
     }
 

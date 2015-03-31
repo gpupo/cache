@@ -8,24 +8,19 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
 
-/**
- *
- */
 class CacheItem implements CacheItemInterface
 {
-    /**
-     * @type string
-     */
     private $key;
 
     private $ttl = 60;
 
     private $value;
+    
+    private $hits = 0;
 
     /**
      * @param string $key
@@ -64,12 +59,21 @@ class CacheItem implements CacheItemInterface
         return true;
     }
 
+    public function setHits($value)
+    {
+        $this->hits = intval($value);
+    }
+    
+    public function getHits()
+    {
+        return $this->hits;
+    }
     /**
      * @return bool
      */
     public function isHit()
     {
-        return false;
+        return ($this->getHits() > 0);
     }
 
     /**

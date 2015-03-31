@@ -56,8 +56,15 @@ abstract class DriverAbstract
             return $obj;
         }
 
-        $unserialized = unserialize($obj);
+        $data = $obj;
 
-        return $unserialized;
+        $isJson = !preg_match('/[^,:{}\\[\\]0-9.\\-+Eaeflnr-u \\n\\r\\t]/',
+            preg_replace('/"(\\.|[^"\\\\])*"/', '', $data));
+
+        if (!$isJson) {            
+            return $data;
+        }
+        
+        return unserialize($data);
     }
 }

@@ -25,15 +25,25 @@ class CacheItemPoolTest extends TestCaseAbstract
         $this->assertInstanceOf('\Gpupo\Cache\Driver\DriverInterface', $pool->getDriver());
     }
 
-    public function testGravaItem()
+    /**
+     * @dataProvider dataProviderItens
+     */
+    public function testGravaItem($key, $value)
     {
         $pool = new CacheItemPool('Apc');
-        $item = new CacheItem('foo');
-        $item->set('bar', 60);
-
+        $item = new CacheItem($key);
+        $item->set($value, 60);
         $this->assertTrue($pool->save($item));
-
-        $restored = $pool->getItem('foo');
-        $this->assertEquals('bar', $restored->get());
+        $restored = $pool->getItem($key);        
+        $this->assertEquals($value, $restored->get());
+    }
+    
+    public function dataProviderItens()
+    {
+        return [
+            ['foo', 'bar'],
+            ['array', [1,2,3]],
+            ['array', [1,'x' => 'y',3]],
+        ];
     }
 }

@@ -55,14 +55,10 @@ class ApcDriver extends DriverAbstract implements DriverInterface
 
         $obj = apc_fetch($id);
 
-        if ($obj !== false) {
-            if (!$unserialize) {
-                return $obj;
-            } else {
-                return unserialize($obj);
-            }
+        if ($obj) {
+            return $this->unserialize($obj, $unserialize);
         }
-
+        
         return false;
     }
 

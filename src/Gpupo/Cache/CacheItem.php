@@ -1,5 +1,14 @@
 <?php
 
+/*
+ * This file is part of gpupo\cache
+ *
+ * (c) Gilmar Pupo <g@g1mr.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
@@ -9,16 +18,15 @@ use Psr\Cache\CacheItemInterface;
  */
 class CacheItem implements CacheItemInterface
 {
-
     /**
-     * @var string
+     * @type string
      */
     private $key;
 
-    private $ttl = 60; 
+    private $ttl = 60;
 
     private $value;
-    
+
     /**
      * @param string $key
      */
@@ -44,7 +52,6 @@ class CacheItem implements CacheItemInterface
     }
 
     /**
-     *
      * @param \Serializable $value
      * @param int           $ttl
      * @returns boolean
@@ -74,12 +81,13 @@ class CacheItem implements CacheItemInterface
     public function delete()
     {
         $this->set(null);
-         
+
         return $this;
     }
 
     /**
-     * nope doesnt exist. ever
+     * nope doesnt exist. ever.
+     *
      * @return bool
      */
     public function exists()
@@ -94,7 +102,7 @@ class CacheItem implements CacheItemInterface
      * This can be used to prevent the dogpile effect to stop lots of requests re-generating
      * the fresh data over and over.
      *
-     * @return boolean
+     * @return bool
      */
     public function isRegenerating()
     {
@@ -113,12 +121,12 @@ class CacheItem implements CacheItemInterface
      *                           the value should be stored permanently or for as long as the
      *                           implementation allows.
      *
-     * @return static  The called object.
+     * @return static The called object.
      */
     public function setExpiration($ttl = null)
     {
         $this->ttl = $ttl;
-        
+
         return $this;
     }
 

@@ -8,14 +8,22 @@ use Memcached;
 
 class MemcachedDriverTest extends TestCaseAbstract
 {
-    protected function factoryDriver()
+    public function setUp()
     {
-        $driver = MemcachedDriver::getInstance();
-        $endpoint = $this->getConstant('MEMCACHED_SERVER', 'localhost');
-        $driver->setOptions(['serverEndPoint' => $endpoint]);
+        parent::setUp();
 
-        return $driver;
+        if (!class_exists('Memcached')) {
+            $this->markTestSkipped('The Memcached extension is not available.');
+        }
+
+        $mem = new Memcached();
+        $mem->addServer($this->getConstant('MEMCACHED_SERVER', 'localhost'), 11211);
+        $stats = $mem->getStats();
+        if (!isset($stats[$this->getConstant('MEMCACHED_SERVER', 'localhost').':11211'])) {
+            $this->markTestSkipped('The Memcached server is not running.');
+        }
     }
+
     public function testPossuiClientMemcached()
     {
         $this->assertInstanceOf('\Memcached', MemcachedDriver::getInstance()->getClient());
@@ -36,6 +44,7 @@ class MemcachedDriverTest extends TestCaseAbstract
         $driver->setOptions(['foo' => 'bar']);
         $this->assertEquals('bar', $driver->getOptions()->get('foo'));
     }            
+
     /**
      * @dataProvider dataProviderObjects
      */
@@ -59,12 +68,13 @@ class MemcachedDriverTest extends TestCaseAbstract
         
         return $data;
     }
-  
-    protected function setUp()
-    {
-        if (!class_exists('Memcached')) {
-            $this->markTestSkipped('The Memcached extension is not available.');
-        }
-    }
 
+    protected function factoryDriver()
+    {
+        $driver = MemcachedDriver::getInstance();
+        $endpoint = $this->getConstant('MEMCACHED_SERVER', 'localhost');
+        $driver->setOptions(['serverEndPoint' => $endpoint]);
+
+        return $driver;
+    }
 }

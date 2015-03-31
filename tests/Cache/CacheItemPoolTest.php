@@ -17,6 +17,15 @@ use Gpupo\Tests\Cache\TestCaseAbstract;
 
 class CacheItemPoolTest extends TestCaseAbstract
 {
+    public function setUp()
+    {
+        parent::setUp();
+
+        if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
+            $this->markTestSkipped('The APC extension is not available.');
+        }
+    }
+
     public function testContemDriverApc()
     {
         $pool = new CacheItemPool('Apc');

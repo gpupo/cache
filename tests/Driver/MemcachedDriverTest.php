@@ -17,6 +17,22 @@ use Memcached;
 
 class MemcachedDriverTest extends TestCaseAbstract
 {
+    public function setUp()
+    {
+        parent::setUp();
+        if (!class_exists('Memcached')) {
+            $this->markTestSkipped('The Memcached extension is not available.');
+        }
+        $mem = new Memcached;
+        $endpoint = $this->getConstant('MEMCACHED_SERVER', 'localhost');
+        $mem->addServer($endpoint, 11211);
+        $stats = $mem->getStats();
+        
+        if (!isset($stats[$endpoint.':11211'])) {
+            $this->markTestSkipped('The Memcached server is not running.');
+        }
+    }
+    
     protected function factoryDriver()
     {
         $driver = MemcachedDriver::getInstance();
@@ -32,11 +48,18 @@ class MemcachedDriverTest extends TestCaseAbstract
 
     public function testArmazenaInformacao()
     {
-        $cacheId = 'foo';
+        $id = 'foo';
         $value = 'bar';
-        $driver = $this->factoryDriver();
-        $this->assertTrue($driver->save($cacheId, $value, 60));
-        $this->assertEquals('bar', $driver->get($cacheId));
+        $driver = $this->factoryDriver();        
+        
+        try {
+            $this->assertTrue($driver->save($id, $value, 60));
+            $this->assertEquals('bar', $driver->get($id));
+        } catch (\RuntimeException $e) {
+            if ($e->getCode() === 47) {
+                $this->markTestSkipped($e->getMessage());
+            }
+        }
     }
 
     public function testPossuiOpcoesPersonalizadas()
@@ -48,31 +71,24 @@ class MemcachedDriverTest extends TestCaseAbstract
     /**
      * @dataProvider dataProviderObjects
      */
-    public function testArmazenaObjeto($object)
+    public function testArmazenaObjeto($id, $object)
     {
         $driver = $this->factoryDriver();
-        $cacheId = $driver->generateId($object);
-        $driver->save($cacheId, $object, 60);
-        $this->assertEquals($object, $driver->get($cacheId));
+        
+        try {
+            $this->assertTrue($driver->save($id, $object, 60));
+            $this->assertEquals($object, $driver->get($id));
+        } catch (\RuntimeException $e) {
+            if ($e->getCode() === 47) {
+                $this->markTestSkipped($e->getMessage());
+            }
+        }
     }
 
     public function dataProviderObjects()
     {
-        $data = array();
-
-        $i = 0;
-        while ($i < 5) {
-            $data[] = array('data' => $data, 'new' => new \ArrayObject());
-            $i++;
-        }
-
-        return $data;
-    }
-
-    protected function setUp()
-    {
-        if (!class_exists('Memcached')) {
-            $this->markTestSkipped('The Memcached extension is not available.');
-        }
+        return [
+            ['array-123', [1,2,3]],
+        ];
     }
 }

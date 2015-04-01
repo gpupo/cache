@@ -29,7 +29,13 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
         return $this->client;
     }
-
+    
+    protected function giveUp()
+    {
+        throw new \RuntimeException('I can not do it for you, Charlie!('
+            . $this->getClient()->getResultMessage() . ')', $this->getClient()->getResultCode());        
+    }
+    
     public function setClient(Memcached $client)
     {
         $this->client = $client;
@@ -43,18 +49,15 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
             return false;
         }
 
-        $obj = $this->serialize($obj, $serialize);
-
-        var_dump(
-       [
-        'id'      => $id,
-        'obj'     => $obj,
-        'ttl'     => $ttl,
-        'options' => $this->getOptions()->toArray(),
-       ]
-       );
-
-        return $this->getClient()->set($id, $obj, $ttl);
+        $string = $this->serialize($obj, $serialize);
+        
+        $op = $this->getClient()->set($id, $string, $ttl);
+   
+        if (!$op) {
+            $this->giveUp();
+        }
+                
+        return $op;
     }
 
     public function get($id, $unserialize = true)
@@ -63,9 +66,11 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
             return false;
         }
 
-        $obj =  $this->getClient()->get($id);
+        $string =  $this->getClient()->get($id);
 
-        return $this->unserialize($obj, $unserialize);
+        $obj = $this->unserialize($string, $unserialize);
+        
+        return $obj;
     }
 
     public function delete($id)

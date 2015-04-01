@@ -15,7 +15,18 @@ use Gpupo\Cache\Driver\ApcDriver;
 use Gpupo\Tests\Cache\TestCaseAbstract;
 
 class ApcDriverTest extends TestCaseAbstract
-{
+{ 
+    protected function setUp()
+    {
+        if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
+            $this->markTestSkipped('The APC extension is not available.');
+        }
+
+        if (!ini_get('apc.enable_cli')) {
+            $this->markTestSkipped('APC CLI disabled.');
+        }
+    }
+    
     public function testArmazenaInformacao()
     {
         $cacheId = 'foo';
@@ -53,16 +64,5 @@ class ApcDriverTest extends TestCaseAbstract
         }
 
         return $data;
-    }
-
-    protected function setUp()
-    {
-        if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
-            $this->markTestSkipped('The APC extension is not available.');
-        }
-
-        if (!ini_get('apc.enable_cli')) {
-            $this->markTestSkipped('APC CLI disabled.');
-        }
     }
 }

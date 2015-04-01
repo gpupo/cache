@@ -15,7 +15,7 @@ use Gpupo\Cache\Driver\ApcDriver;
 use Gpupo\Tests\Cache\TestCaseAbstract;
 
 class ApcDriverTest extends TestCaseAbstract
-{ 
+{
     protected function setUp()
     {
         if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
@@ -26,7 +26,7 @@ class ApcDriverTest extends TestCaseAbstract
             $this->markTestSkipped('APC CLI disabled.');
         }
     }
-    
+
     public function testArmazenaInformacao()
     {
         $cacheId = 'foo';

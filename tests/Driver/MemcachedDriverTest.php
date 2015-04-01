@@ -23,16 +23,16 @@ class MemcachedDriverTest extends TestCaseAbstract
         if (!class_exists('Memcached')) {
             $this->markTestSkipped('The Memcached extension is not available.');
         }
-        $mem = new Memcached;
+        $mem = new Memcached();
         $endpoint = $this->getConstant('MEMCACHED_SERVER', 'localhost');
         $mem->addServer($endpoint, 11211);
         $stats = $mem->getStats();
-        
+
         if (!isset($stats[$endpoint.':11211'])) {
             $this->markTestSkipped('The Memcached server is not running.');
         }
     }
-    
+
     protected function factoryDriver()
     {
         $driver = MemcachedDriver::getInstance();
@@ -50,8 +50,8 @@ class MemcachedDriverTest extends TestCaseAbstract
     {
         $id = 'foo';
         $value = 'bar';
-        $driver = $this->factoryDriver();        
-        
+        $driver = $this->factoryDriver();
+
         try {
             $this->assertTrue($driver->save($id, $value, 60));
             $this->assertEquals('bar', $driver->get($id));
@@ -74,7 +74,7 @@ class MemcachedDriverTest extends TestCaseAbstract
     public function testArmazenaObjeto($id, $object)
     {
         $driver = $this->factoryDriver();
-        
+
         try {
             $this->assertTrue($driver->save($id, $object, 60));
             $this->assertEquals($object, $driver->get($id));

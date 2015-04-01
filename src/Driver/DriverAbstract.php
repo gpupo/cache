@@ -50,13 +50,6 @@ abstract class DriverAbstract
             return $string;
         }
 
-        return unserialize($string);    
+        return unserialize($string);
     }
-    
-    protected function isJson($string) {
-        json_decode($string);
-        return (json_last_error() == JSON_ERROR_NONE);
-    }
-
-
 }

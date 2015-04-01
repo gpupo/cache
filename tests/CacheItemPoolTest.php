@@ -13,10 +13,9 @@ namespace Gpupo\Tests\Cache;
 
 use Gpupo\Cache\CacheItem;
 use Gpupo\Cache\CacheItemPool;
-use Gpupo\Tests\Cache\TestCaseAbstract;
 
 class CacheItemPoolTest extends TestCaseAbstract
-{    
+{
     protected function setUp()
     {
         if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
@@ -27,7 +26,7 @@ class CacheItemPoolTest extends TestCaseAbstract
             $this->markTestSkipped('APC CLI disabled.');
         }
     }
-    
+
     public function testContemDriverApc()
     {
         $pool = new CacheItemPool('Apc');
@@ -45,10 +44,10 @@ class CacheItemPoolTest extends TestCaseAbstract
         $item = new CacheItem($key);
         $item->set($value, 60);
         $this->assertTrue($pool->save($item));
-        $restored = $pool->getItem($key);        
+        $restored = $pool->getItem($key);
         $this->assertEquals($value, $restored->get());
     }
-    
+
     public function dataProviderItens()
     {
         return [

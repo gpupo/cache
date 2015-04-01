@@ -8,6 +8,7 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
+
 namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
@@ -19,7 +20,7 @@ class CacheItem implements CacheItemInterface
     private $ttl = 60;
 
     private $value;
-    
+
     private $hits = 0;
 
     /**
@@ -63,7 +64,7 @@ class CacheItem implements CacheItemInterface
     {
         $this->hits = intval($value);
     }
-    
+
     public function getHits()
     {
         return $this->hits;

@@ -29,13 +29,13 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
         return $this->client;
     }
-    
+
     protected function giveUp()
     {
         throw new \RuntimeException('I can not do it for you, Charlie!('
-            . $this->getClient()->getResultMessage() . ')', $this->getClient()->getResultCode());        
+            .$this->getClient()->getResultMessage().')', $this->getClient()->getResultCode());
     }
-    
+
     public function setClient(Memcached $client)
     {
         $this->client = $client;
@@ -50,13 +50,13 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
         }
 
         $string = $this->serialize($obj, $serialize);
-        
+
         $op = $this->getClient()->set($id, $string, $ttl);
-   
+
         if (!$op) {
             $this->giveUp();
         }
-                
+
         return $op;
     }
 
@@ -69,7 +69,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
         $string =  $this->getClient()->get($id);
 
         $obj = $this->unserialize($string, $unserialize);
-        
+
         return $obj;
     }
 

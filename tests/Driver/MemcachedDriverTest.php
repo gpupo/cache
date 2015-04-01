@@ -43,6 +43,7 @@ class MemcachedDriverTest extends TestCaseAbstract
     }
     public function testPossuiClientMemcached()
     {
+        $this->assertInstanceOf('\Gpupo\Cache\Driver\MemcachedDriver', MemcachedDriver::getInstance());
         $this->assertInstanceOf('\Memcached', MemcachedDriver::getInstance()->getClient());
     }
 

@@ -17,6 +17,12 @@ trait CacheAwareTrait
 {
     protected $cacheItemPool;
 
+    /**
+     * Returns an instance of CacheItemPool
+     *
+     * @return CacheItemPoolInterface|null The CacheItemPool instance if set, otherwise NULL
+     * @access public
+     */
     public function getCacheItemPool()
     {
         return $this->cacheItemPool;

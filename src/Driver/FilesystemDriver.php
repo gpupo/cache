@@ -3,7 +3,7 @@
 /*
  * This file is part of gpupo\cache
  *
- * (c) Benjamin Carl <opensource@clickalicious.de>
+ * (c) Gilmar Pupo <g@g1mr.com>
  *
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
@@ -17,10 +17,9 @@ namespace Gpupo\Cache\Driver;
 class FilesystemDriver extends DriverAbstract implements DriverInterface
 {
     /**
-     * Path to directory to cache contents in
+     * Path to directory to cache contents in.
      *
-     * @var string
-     * @access protected
+     * @type string
      */
     protected $path = '';
 
@@ -30,7 +29,6 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * @param null|string $path The path to set
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
-     * @access public
      */
     public function __construct($path = null)
     {
@@ -93,8 +91,8 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * @param bool   $unserialize Controls whether unserialization is required or not
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
+     *
      * @return null|mixed The cached content if exist, otherwise NULL
-     * @access public
      */
     public function get($id, $unserialize = true)
     {
@@ -136,8 +134,8 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * @param string $id The Id of the content to delete from cache
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
+     *
      * @return bool TRUE on success, otherwise FALSE
-     * @access public
      */
     public function delete($id)
     {
@@ -184,8 +182,6 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * @param string $path The path to set
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
-     * @return void
-     * @access public
      */
     public function setPath($path)
     {
@@ -201,7 +197,7 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
             );
         }
 
-        if (DIRECTORY_SEPARATOR !== $path[strlen($path)-1]) {
+        if (DIRECTORY_SEPARATOR !== $path[strlen($path) - 1]) {
             $path .= DIRECTORY_SEPARATOR;
         }
 
@@ -214,8 +210,8 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * @param string $path The path to set
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
+     *
      * @return $this Instance for chaining
-     * @access protected
      */
     protected function path($path)
     {
@@ -228,8 +224,8 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * Getter for path.
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
+     *
      * @return string|null The path if set, otherwise NULL
-     * @access public
      */
     public function getPath()
     {
@@ -242,20 +238,20 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      * @param string $id The Id to return filename for
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
+     *
      * @return string The filename
-     * @access protected
      */
     protected function getFilenameById($id)
     {
-        return $this->getPath() . $id;
+        return $this->getPath().$id;
     }
 
     /**
      * Check for supported.
      *
      * @author Benjamin Carl <opensource@clickalicious.de>
+     *
      * @return bool TRUE if supported, otherwise FALSE
-     * @access protected
      */
     public function isSupported()
     {

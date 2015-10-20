@@ -8,8 +8,9 @@ This is a Caching library that implements PSR-6.
 it also contains a copy of the current (2014-09-24) PSR interface, and has this set as a composer "replace"
 relation.
 
-Current Driver Suport:
+Current Driver Support:
 
+* Filesystem
 * APC
 * Memached
 

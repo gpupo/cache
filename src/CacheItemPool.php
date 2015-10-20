@@ -45,7 +45,7 @@ class CacheItemPool implements CacheItemPoolInterface
         $this->driver = $driver;
     }
 
-    public function __construct($driver = 'Apc')
+    public function __construct($driver = 'Filesystem')
     {
         $this->setDriver($driver);
     }

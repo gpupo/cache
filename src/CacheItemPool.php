@@ -72,6 +72,14 @@ class CacheItemPool implements CacheItemPoolInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function hasItem($key)
+    {
+        return $this->getId($key)->exists();
+    }
+
+    /**
      * @param array $keys
      *
      * @return array|\Traversable
@@ -87,7 +95,7 @@ class CacheItemPool implements CacheItemPoolInterface
     }
 
     /**
-     * @return $this|CacheItemPoolInterface
+     * {@inheritdoc}
      */
     public function clear()
     {
@@ -106,10 +114,18 @@ class CacheItemPool implements CacheItemPoolInterface
     public function deleteItems(array $keys)
     {
         foreach ($keys as $key) {
-            $this->getDriver()->delete($key);
+            $this->deleteItem($key);
         }
 
         return $this;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function deleteItem($key)
+    {
+        return $this->getDriver()->delete($key);
     }
 
     /**

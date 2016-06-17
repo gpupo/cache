@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache\Driver;
 
 use Memcached;
@@ -19,7 +18,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
     public function getClient()
     {
-        if (!$this->client) {
+        if ( ! $this->client) {
             $client = new Memcached();
             $client->addServer(
                 $this->getOptions()->get('serverEndPoint', 'localhost'),
@@ -33,7 +32,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
     protected function giveUp()
     {
         throw new \RuntimeException('I can not do it for you, Charlie!('
-            .$this->getClient()->getResultMessage().')', $this->getClient()->getResultCode());
+            . $this->getClient()->getResultMessage() . ')', $this->getClient()->getResultCode());
     }
 
     public function setClient(Memcached $client)
@@ -45,7 +44,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
     public function save($id, $obj, $ttl, $serialize = true)
     {
-        if (!$this->isSupported()) {
+        if ( ! $this->isSupported()) {
             return false;
         }
 
@@ -53,7 +52,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
         $op = $this->getClient()->set($id, $string, $ttl);
 
-        if (!$op) {
+        if ( ! $op) {
             $this->giveUp();
         }
 
@@ -62,11 +61,11 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
     public function get($id, $unserialize = true)
     {
-        if (!$this->isSupported()) {
+        if ( ! $this->isSupported()) {
             return false;
         }
 
-        $string =  $this->getClient()->get($id);
+        $string = $this->getClient()->get($id);
 
         $obj = $this->unserialize($string, $unserialize);
 
@@ -75,7 +74,7 @@ class MemcachedDriver extends DriverAbstract implements DriverInterface
 
     public function delete($id)
     {
-        if (!$this->isSupported()) {
+        if ( ! $this->isSupported()) {
             return false;
         }
 

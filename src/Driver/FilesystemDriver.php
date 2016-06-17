@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache\Driver;
 
 /**
@@ -112,7 +111,7 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
 
         // Get filename
         $filename = $this->getFilenameById($id);
-        $content  = null;
+        $content = null;
 
         if (true === file_exists($filename)) {
             if (false === is_readable($filename)) {
@@ -155,7 +154,7 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
 
         // Get filename
         $filename = $this->getFilenameById($id);
-        $result   = false;
+        $result = false;
 
         if (true === file_exists($filename)) {
             if (false === is_writable($filename)) {
@@ -243,7 +242,7 @@ class FilesystemDriver extends DriverAbstract implements DriverInterface
      */
     protected function getFilenameById($id)
     {
-        return $this->getPath().$id;
+        return $this->getPath() . $id;
     }
 
     /**

@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Tests\Cache;
 
 use Gpupo\Cache\CacheItem;
@@ -18,11 +17,11 @@ class CacheItemPoolTest extends TestCaseAbstract
 {
     protected function setUp()
     {
-        if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
+        if ( ! (extension_loaded('apc') && ini_get('apc.enabled'))) {
             $this->markTestSkipped('The APC extension is not available.');
         }
 
-        if (!ini_get('apc.enable_cli')) {
+        if ( ! ini_get('apc.enable_cli')) {
             $this->markTestSkipped('APC CLI disabled.');
         }
     }
@@ -45,15 +44,15 @@ class CacheItemPoolTest extends TestCaseAbstract
         $item->set($value, 60);
         $this->assertTrue($pool->save($item));
         $restored = $pool->getItem($key);
-        $this->assertEquals($value, $restored->get());
+        $this->assertSame($value, $restored->get());
     }
 
     public function dataProviderItens()
     {
         return [
             ['foo', 'bar'],
-            ['array', [1,2,3]],
-            ['array', [1,'x' => 'y',3]],
+            ['array', [1, 2, 3]],
+            ['array', [1, 'x' => 'y', 3]],
         ];
     }
 }

@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Tests\Cache\Driver;
 
 use Gpupo\Cache\Driver\ApcDriver;
@@ -18,11 +17,11 @@ class ApcDriverTest extends TestCaseAbstract
 {
     protected function setUp()
     {
-        if (!(extension_loaded('apc') && ini_get('apc.enabled'))) {
+        if ( ! (extension_loaded('apc') && ini_get('apc.enabled'))) {
             $this->markTestSkipped('The APC extension is not available.');
         }
 
-        if (!ini_get('apc.enable_cli')) {
+        if ( ! ini_get('apc.enable_cli')) {
             $this->markTestSkipped('APC CLI disabled.');
         }
     }
@@ -33,14 +32,14 @@ class ApcDriverTest extends TestCaseAbstract
         $value = 'bar';
         $driver = ApcDriver::getInstance();
         $driver->save($cacheId, $value, 60);
-        $this->assertEquals('bar', $driver->get($cacheId));
+        $this->assertSame('bar', $driver->get($cacheId));
     }
 
     public function testPossuiOpcoesPersonalizadas()
     {
         $driver = ApcDriver::getInstance();
         $driver->setOptions(['foo' => 'bar']);
-        $this->assertEquals('bar', $driver->getOptions()->get('foo'));
+        $this->assertSame('bar', $driver->getOptions()->get('foo'));
     }
     /**
      * @dataProvider dataProviderObjects
@@ -50,17 +49,17 @@ class ApcDriverTest extends TestCaseAbstract
         $driver = ApcDriver::getInstance();
         $cacheId = $driver->generateId($object);
         $driver->save($cacheId, $object, 60);
-        $this->assertEquals($object, $driver->get($cacheId));
+        $this->assertSame($object, $driver->get($cacheId));
     }
 
     public function dataProviderObjects()
     {
-        $data = array();
+        $data = [];
 
         $i = 0;
         while ($i < 5) {
-            $data[] = array('data' => $data, 'new' => new \ArrayObject());
-            $i++;
+            $data[] = ['data' => $data, 'new' => new \ArrayObject()];
+            ++$i;
         }
 
         return $data;

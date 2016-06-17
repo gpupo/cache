@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache;
 
 use Gpupo\Cache\Driver\DriverInterface;
@@ -23,7 +22,7 @@ class CacheItemPool implements CacheItemPoolInterface
 
     public function getDriver()
     {
-        if (!$this->driver instanceof DriverInterface) {
+        if ( ! $this->driver instanceof DriverInterface) {
             throw new \InvalidArgumentException('DriverInterface missed');
         }
 
@@ -32,13 +31,13 @@ class CacheItemPool implements CacheItemPoolInterface
 
     protected function setDriver($driver)
     {
-        if (!$driver instanceof DriverInterface) {
+        if ( ! $driver instanceof DriverInterface) {
             $className = '\\Gpupo\\Cache\\Driver\\'
-                .ucfirst(strtolower($driver)).'Driver';
+                . ucfirst(strtolower($driver)) . 'Driver';
             $driver = new $className();
         }
 
-        if (!$driver instanceof DriverInterface) {
+        if ( ! $driver instanceof DriverInterface) {
             throw new \InvalidArgumentException('$driver must implement DriverInterface');
         }
 
@@ -74,7 +73,7 @@ class CacheItemPool implements CacheItemPoolInterface
      *
      * @return array|\Traversable
      */
-    public function getItems(array $keys = array())
+    public function getItems(array $keys = [])
     {
         $result = [];
         foreach ($keys as $key) {

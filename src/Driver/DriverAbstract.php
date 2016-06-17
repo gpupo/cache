@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache\Driver;
 
 use Gpupo\Common\Traits\OptionsTrait;
@@ -27,7 +26,7 @@ abstract class DriverAbstract
             $sha1 = sha1($key);
         }
 
-        return $prefix.$sha1;
+        return $prefix . $sha1;
     }
 
     protected function isValidKey($key)
@@ -46,7 +45,7 @@ abstract class DriverAbstract
 
     public function unserialize($string, $unserialize = true)
     {
-        if (!$unserialize) {
+        if ( ! $unserialize) {
             return $string;
         }
 

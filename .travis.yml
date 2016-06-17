@@ -13,6 +13,6 @@ matrix:
     - php: hhvm
 before_script:
   - ant
-script: ant test
+script: ant phpunit
 notifications:
   email: false

@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemPoolInterface;
@@ -29,7 +28,7 @@ trait CacheAwareTrait
 
     public function hasCacheItemPool()
     {
-        return !empty($this->cacheItemPool);
+        return ! empty($this->cacheItemPool);
     }
 
     public function setCacheItemPool(CacheItemPoolInterface $cacheItemPool)

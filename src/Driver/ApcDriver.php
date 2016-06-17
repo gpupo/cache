@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache\Driver;
 
 /**
@@ -25,11 +24,11 @@ class ApcDriver extends DriverAbstract implements DriverInterface
      */
     public function save($id, $obj, $ttl, $serialize = true)
     {
-        if (!$this->isSupported()) {
+        if ( ! $this->isSupported()) {
             return false;
         }
 
-        if (!$this->isValidKey($id)) {
+        if ( ! $this->isValidKey($id)) {
             return false;
         }
 
@@ -45,11 +44,11 @@ class ApcDriver extends DriverAbstract implements DriverInterface
      */
     public function get($id, $unserialize = true)
     {
-        if (!$this->isSupported()) {
+        if ( ! $this->isSupported()) {
             return false;
         }
 
-        if (!$this->isValidKey($id)) {
+        if ( ! $this->isValidKey($id)) {
             return false;
         }
 
@@ -69,11 +68,11 @@ class ApcDriver extends DriverAbstract implements DriverInterface
      */
     public function delete($id)
     {
-        if (!$this->isSupported()) {
+        if ( ! $this->isSupported()) {
             return false;
         }
 
-        if (!$this->isValidKey($id)) {
+        if ( ! $this->isValidKey($id)) {
             return false;
         }
 

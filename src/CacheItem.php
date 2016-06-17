@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Cache;
 
 use Psr\Cache\CacheItemInterface;
@@ -74,7 +73,7 @@ class CacheItem implements CacheItemInterface
      */
     public function isHit()
     {
-        return ($this->getHits() > 0);
+        return $this->getHits() > 0;
     }
 
     /**
@@ -97,7 +96,7 @@ class CacheItem implements CacheItemInterface
      */
     public function exists()
     {
-        return !empty($this->value);
+        return ! empty($this->value);
     }
 
     /**

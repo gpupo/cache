@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Tests\Cache\Driver;
 
 use Gpupo\Cache\Driver\NullDriver;
@@ -20,10 +19,10 @@ class DriverAbstractTest extends TestCaseAbstract
     {
         $driver = NullDriver::getInstance();
 
-        $array = [1,[2],[3,4]];
+        $array = [1, [2], [3, 4]];
 
         $serialized = $driver->serialize($array);
 
-        $this->assertEquals($array, $driver->unserialize($serialized));
+        $this->assertSame($array, $driver->unserialize($serialized));
     }
 }

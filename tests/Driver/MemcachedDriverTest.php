@@ -8,7 +8,6 @@
  * For the full copyright and license information, please view the LICENSE
  * file that was distributed with this source code.
  */
-
 namespace Gpupo\Tests\Cache\Driver;
 
 use Gpupo\Cache\Driver\MemcachedDriver;
@@ -20,7 +19,7 @@ class MemcachedDriverTest extends TestCaseAbstract
     public function setUp()
     {
         parent::setUp();
-        if (!class_exists('Memcached')) {
+        if ( ! class_exists('Memcached')) {
             $this->markTestSkipped('The Memcached extension is not available.');
         }
         $mem = new Memcached();
@@ -28,7 +27,7 @@ class MemcachedDriverTest extends TestCaseAbstract
         $mem->addServer($endpoint, 11211);
         $stats = $mem->getStats();
 
-        if (!isset($stats[$endpoint.':11211'])) {
+        if ( ! isset($stats[$endpoint . ':11211'])) {
             $this->markTestSkipped('The Memcached server is not running.');
         }
     }
@@ -55,7 +54,7 @@ class MemcachedDriverTest extends TestCaseAbstract
 
         try {
             $this->assertTrue($driver->save($id, $value, 60));
-            $this->assertEquals('bar', $driver->get($id));
+            $this->assertSame('bar', $driver->get($id));
         } catch (\RuntimeException $e) {
             if ($e->getCode() === 47) {
                 $this->markTestSkipped($e->getMessage());
@@ -67,7 +66,7 @@ class MemcachedDriverTest extends TestCaseAbstract
     {
         $driver = $this->factoryDriver();
         $driver->setOptions(['foo' => 'bar']);
-        $this->assertEquals('bar', $driver->getOptions()->get('foo'));
+        $this->assertSame('bar', $driver->getOptions()->get('foo'));
     }
     /**
      * @dataProvider dataProviderObjects
@@ -78,7 +77,7 @@ class MemcachedDriverTest extends TestCaseAbstract
 
         try {
             $this->assertTrue($driver->save($id, $object, 60));
-            $this->assertEquals($object, $driver->get($id));
+            $this->assertSame($object, $driver->get($id));
         } catch (\RuntimeException $e) {
             if ($e->getCode() === 47) {
                 $this->markTestSkipped($e->getMessage());
@@ -89,7 +88,7 @@ class MemcachedDriverTest extends TestCaseAbstract
     public function dataProviderObjects()
     {
         return [
-            ['array-123', [1,2,3]],
+            ['array-123', [1, 2, 3]],
         ];
     }
 }

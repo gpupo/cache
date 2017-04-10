@@ -1,5 +1,8 @@
-#List of dependencies:
-```
+
+## Lista de dependências (libraries)
+
+Name | Version | Description
+-----|---------|------------------------------------------------------
 doctrine/annotations               v1.2.7 Docblock Annotations Parser
 doctrine/cache                     v1.6.0 Caching library offering an object-oriented API for many cache backends
 doctrine/collections               v1.3.0 Collections Abstraction library
@@ -7,7 +10,7 @@ doctrine/common                    v2.5.3 Common Library for Doctrine projects
 doctrine/inflector                 v1.1.0 Common String Manipulations with regard to casing and singular/plural rules.
 doctrine/instantiator              1.0.5  A small, lightweight utility to instantiate objects in PHP without invoking their constructors
 doctrine/lexer                     v1.0.1 Base library for a lexer that can be used in Top-Down, Recursive Descent Parsers.
-gpupo/common                       1.6.0  Common Objects
+gpupo/common                       1.6.6  Common Objects
 myclabs/deep-copy                  1.5.1  Create deep copies (clones) of your objects
 phpdocumentor/reflection-common    1.0    Common reflection classes used by phpdocumentor to reflect the code structure
 phpdocumentor/reflection-docblock  3.1.0  With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.
@@ -33,3 +36,5 @@ sebastian/resource-operations      1.0.0  Provides a list of PHP built-in functi
 sebastian/version                  2.0.0  Library that helps with managing the version number of Git-hosted PHP projects
 symfony/yaml                       v3.1.1 Symfony Yaml Component
 webmozart/assert                   1.0.2  Assertions to validate method input/output with nice error messages.
+
+

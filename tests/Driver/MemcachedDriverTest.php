@@ -1,16 +1,17 @@
 <?php
 
 /*
- * This file is part of gpupo\cache
- *
- * (c) Gilmar Pupo <g@g1mr.com>
- *
- * For the full copyright and license information, please view the LICENSE
- * file that was distributed with this source code.
- *
- * For more information, see
- * <http://www.g1mr.com/cache/>.
+ * This file is part of gpupo/cache
+ * Created by Gilmar Pupo <contact@gpupo.com>
+ * For the information of copyright and license you should read the file
+ * LICENSE which is distributed with this source code.
+ * Para a informação dos direitos autorais e de licença você deve ler o arquivo
+ * LICENSE que é distribuído com este código-fonte.
+ * Para obtener la información de los derechos de autor y la licencia debe leer
+ * el archivo LICENSE que se distribuye con el código fuente.
+ * For more information, see <https://www.gpupo.com/>.
  */
+
 namespace Gpupo\Tests\Cache\Driver;
 
 use Gpupo\Cache\Driver\MemcachedDriver;
@@ -22,7 +23,7 @@ class MemcachedDriverTest extends TestCaseAbstract
     public function setUp()
     {
         parent::setUp();
-        if ( ! class_exists('Memcached')) {
+        if (!class_exists('Memcached')) {
             $this->markTestSkipped('The Memcached extension is not available.');
         }
         $mem = new Memcached();
@@ -30,7 +31,7 @@ class MemcachedDriverTest extends TestCaseAbstract
         $mem->addServer($endpoint, 11211);
         $stats = $mem->getStats();
 
-        if ( ! isset($stats[$endpoint . ':11211'])) {
+        if (!isset($stats[$endpoint.':11211'])) {
             $this->markTestSkipped('The Memcached server is not running.');
         }
     }

@@ -63,6 +63,20 @@ class CacheItem implements CacheItemInterface
         return true;
     }
 
+    /**
+     * Sets the expiration time for this cache item.
+     */
+    public function expiresAt($expiration)
+    {
+    }
+
+    /**
+     * Sets the expiration time for this cache item.
+     */
+    public function expiresAfter($time)
+    {
+    }
+
     public function setHits($value)
     {
         $this->hits = intval($value);
@@ -100,7 +114,7 @@ class CacheItem implements CacheItemInterface
      */
     public function exists()
     {
-        return ! empty($this->value);
+        return !empty($this->value);
     }
 
     /**

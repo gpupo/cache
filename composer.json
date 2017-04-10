@@ -1,7 +1,13 @@
 {
     "name": "gpupo/cache",
     "description": "Caching library that implements PSR-6",
-    "homepage": "http://www.g1mr.com/cache/",
+    "homepage": "https://opensource.gpupo.com/cache/",
+    "authors": [
+        {
+            "name": "Gilmar Pupo",
+            "email": "contact@gpupo.com"
+        }
+    ],
     "keywords": ["cache", "psr-6"],
     "license": "MIT",
     "require": {

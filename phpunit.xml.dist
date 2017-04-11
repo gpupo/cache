@@ -10,20 +10,25 @@
          stopOnFailure="false"
          syntaxCheck="false"
          bootstrap="vendor/autoload.php"
+         mapTestClassNameToCoveredClassName="true"
 >
-    <!-- Customize your parameters ! -->
-    <php>
-        <const name="MEMCACHED_SERVER" value="localhost"/>
-    </php>
     <testsuites>
         <testsuite name="Main Test Suite">
             <directory>tests</directory>
         </testsuite>
     </testsuites>
-
     <filter>
         <whitelist>
             <directory>src/</directory>
         </whitelist>
     </filter>
+    <logging>
+      <log type="coverage-clover" target="build/logs/clover.xml"/>
+      <log type="testdox-text" target="build/logs/testdox.txt"/>
+      <log type="testdox-html" target="build/logs/testdox.html"/>
+      <log type="coverage-text" target="php://stdout" showUncoveredFiles="false"/>
+      <log type="coverage-text" target=" Resources/doc/coverage.md" showUncoveredFiles="false"/>
+      <log type="coverage-html" target="build/logs/report" title="Coverage"
+        charset="UTF-8" yui="true" highlight="true" lowUpperBound="50" highLowerBound="80" />
+    </logging>
 </phpunit>

@@ -106,6 +106,50 @@ phpunit/phpunit 5.7.19 The PHP Unit Testing framework.
 |  `--php >=5.6
 `--symfony/yaml ~2.1|~3.0
    `--php >=5.5.9
+codeclimate/php-test-reporter v0.4.4 PHP client for reporting test coverage to Code Climate
+|--ext-curl *
+|--padraic/phar-updater ^1.0
+|  |--padraic/humbug_get_contents ^1.0
+|  |  `--php >=5.3
+|  `--php >=5.3.3
+|--php ^5.3 || ^7.0
+|--psr/log ^1.0
+|  `--php >=5.3.0
+|--satooshi/php-coveralls ^1.0
+|  |--ext-json *
+|  |--ext-simplexml *
+|  |--guzzle/guzzle ^2.8|^3.0
+|  |  |--ext-curl *
+|  |  |--php >=5.3.3
+|  |  `--symfony/event-dispatcher ~2.1
+|  |     `--php >=5.3.9
+|  |--php >=5.3.3
+|  |--psr/log ^1.0
+|  |  `--php >=5.3.0
+|  |--symfony/config ^2.1|^3.0
+|  |  |--php >=5.5.9
+|  |  `--symfony/filesystem ~2.8|~3.0
+|  |     `--php >=5.5.9
+|  |--symfony/console ^2.1|^3.0
+|  |  |--php >=5.5.9
+|  |  |--symfony/debug ~2.8|~3.0
+|  |  |  |--php >=5.5.9
+|  |  |  `--psr/log ~1.0
+|  |  |     `--php >=5.3.0
+|  |  `--symfony/polyfill-mbstring ~1.0
+|  |     `--php >=5.3.3
+|  |--symfony/stopwatch ^2.0|^3.0
+|  |  `--php >=5.5.9
+|  `--symfony/yaml ^2.0|^3.0
+|     `--php >=5.5.9
+`--symfony/console ^2.0 || ^3.0
+   |--php >=5.5.9
+   |--symfony/debug ~2.8|~3.0
+   |  |--php >=5.5.9
+   |  `--psr/log ~1.0
+   |     `--php >=5.3.0
+   `--symfony/polyfill-mbstring ~1.0
+      `--php >=5.3.3
 
 ```
 ---

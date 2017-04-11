@@ -3,10 +3,14 @@
 
 Name | Version | Description
 -----|---------|------------------------------------------------------
+codeclimate/php-test-reporter      v0.4.4             PHP client for reporting test coverage to Code Climate
 doctrine/instantiator              1.0.5              A small, lightweight utility to instantiate objects in PHP without invoking their constructors
 fig/cache-util                     dev-master adc9cbe Useful utility classes and traits for implementing the PSR cache standard
 gpupo/common                       1.7.6              Common Objects
+guzzle/guzzle                      v3.9.3             PHP HTTP client. This library is deprecated in favor of https://packagist.org/packages/guzzlehttp/guzzle
 myclabs/deep-copy                  1.6.0              Create deep copies (clones) of your objects
+padraic/humbug_get_contents        1.0.4              Secure wrapper for accessing HTTPS resources with file_get_contents for PHP 5.3+
+padraic/phar-updater               1.0.3              A thing to make PHAR self-updating easy and secure.
 phpdocumentor/reflection-common    1.0                Common reflection classes used by phpdocumentor to reflect the code structure
 phpdocumentor/reflection-docblock  3.1.1              With this component, a library can provide support for annotations via DocBlocks or otherwise retrieve information that is embedded in a DocBlock.
 phpdocumentor/type-resolver        0.2.1             
@@ -19,6 +23,8 @@ phpunit/php-token-stream           1.4.11             Wrapper around PHP's token
 phpunit/phpunit                    5.7.19             The PHP Unit Testing framework.
 phpunit/phpunit-mock-objects       3.4.3              Mock Object library for PHPUnit
 psr/cache                          1.0.1              Common interface for caching libraries
+psr/log                            1.0.2              Common interface for logging libraries
+satooshi/php-coveralls             v1.0.1             PHP client library for Coveralls API
 sebastian/code-unit-reverse-lookup 1.0.1              Looks up which function or method a line of code belongs to
 sebastian/comparator               1.2.4              Provides the functionality to compare PHP values for equality
 sebastian/diff                     1.4.1              Diff implementation
@@ -29,6 +35,13 @@ sebastian/object-enumerator        2.0.1              Traverses array structures
 sebastian/recursion-context        2.0.0              Provides functionality to recursively process PHP variables
 sebastian/resource-operations      1.0.0              Provides a list of PHP built-in functions that operate on resources
 sebastian/version                  2.0.1              Library that helps with managing the version number of Git-hosted PHP projects
+symfony/config                     v3.2.7             Symfony Config Component
+symfony/console                    v3.2.7             Symfony Console Component
+symfony/debug                      v3.2.7             Symfony Debug Component
+symfony/event-dispatcher           v2.8.19            Symfony EventDispatcher Component
+symfony/filesystem                 v3.2.7             Symfony Filesystem Component
+symfony/polyfill-mbstring          v1.3.0             Symfony polyfill for the Mbstring extension
+symfony/stopwatch                  v3.2.7             Symfony Stopwatch Component
 symfony/yaml                       v3.2.7             Symfony Yaml Component
 webmozart/assert                   1.2.0              Assertions to validate method input/output with nice error messages.
 

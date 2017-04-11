@@ -19,5 +19,5 @@ use Psr\Cache\CacheItemInterface;
 
 class CacheItem implements CacheItemInterface
 {
-    use BasicCacheItemTrait
+    use BasicCacheItemTrait;
 }

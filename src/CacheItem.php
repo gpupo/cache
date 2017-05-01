@@ -17,7 +17,38 @@ namespace Gpupo\Cache;
 use Fig\Cache\BasicCacheItemTrait;
 use Psr\Cache\CacheItemInterface;
 
+/**
+ * Class CacheItem
+ *
+ * @package Gpupo\Cache
+ * @inheritdoc
+ */
 class CacheItem implements CacheItemInterface
 {
     use BasicCacheItemTrait;
+
+    /**
+     * Default TTL 1 year in seconds - used in case no expiration was set.
+     *
+     * @var int
+     */
+    protected $ttlDefault = 31536000;
+
+    /**
+     * Bridge for backward compatibility to @see CacheItemPool returns ttl of item calculated by "expiration" on request.
+     *
+     * @return int TTL (expiration) of item in seconds.
+     */
+    public function getExpiration()
+    {
+        $expiration = $this->expiration;
+
+        if (null === $expiration) {
+            $expiration = $this->ttlDefault;
+        } else {
+            $expiration = $this->expiration->getTimestamp() - time();
+        }
+
+        return $expiration;
+    }
 }
